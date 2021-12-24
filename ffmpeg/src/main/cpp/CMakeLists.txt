@@ -22,7 +22,7 @@ add_library(
 
         #你写好的cpp文件
 
-        main.cpp)
+        native-lib.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
 
