@@ -4,13 +4,13 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
-import com.example.yanghao.speakdemo.MainActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.example.ffmpeg.Video
 
 class MainActivity : AppCompatActivity() {
     private var btnSpeak: Button? = null
@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
                 t.show()
             }
         }
+
+        txtText!!.text = Video().video();
     }
 
     //接收返回的结果
@@ -59,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                     val textView = TextView(this@MainActivity)
                     if (text[0].contains("按钮")) {
                         llMain!!.addView(button)
-                        textView.id = R.id.wenzi
+
                     }
                     if (text[0].contains("名字是")) {
                         val a = text[0].split("是").toTypedArray()

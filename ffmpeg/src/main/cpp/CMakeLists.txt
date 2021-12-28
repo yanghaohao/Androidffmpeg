@@ -2,6 +2,8 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+set(jnilibs ${CMAKE_SOURCE_DIR}/../jniLibs)
+
 # Creates and names a library, sets it as either STATIC
 
 # or SHARED, and provides the relative paths to its source code.
@@ -9,6 +11,12 @@ cmake_minimum_required(VERSION 3.4.1)
 # You can define multiple libraries, and CMake builds them for you.
 
 # Gradle automatically packages shared libraries with your APK.
+link_directories(${jnilibs}/${ANDROID_ABI})
+set(third-party-libs avformat avcodec avfilter swresample swscale avutil)
+
+include_directories(include ${CMAKE_SOURCE_DIR}/util)
+file(GLOB src-files ${CMAKE_SOURCE_DIR}/*.cpp)
+set(native-libs android EGL GLESv3 OpenSLES log m z)
 
 add_library(
 
@@ -21,8 +29,8 @@ add_library(
         SHARED
 
         #你写好的cpp文件
-
-        native-lib.cpp)
+        ${src-files}
+)
 
 # Searches for a specified prebuilt library and stores the path as a
 
@@ -59,5 +67,6 @@ target_link_libraries( # Specifies the target library.
         # Links the target library to the log library
 
         # included in the NDK.
-
-        ${log-lib} )
+        ${native-libs}
+        ${log-lib}
+        ${third-party-libs})

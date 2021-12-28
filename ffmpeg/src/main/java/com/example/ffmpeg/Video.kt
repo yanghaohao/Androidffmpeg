@@ -14,4 +14,8 @@ class Video {
             System.loadLibrary("native-lib")
         }
     }
+
+    public fun info():String{
+        return video()
+    }
 }
